@@ -45,7 +45,6 @@ namespace PosBookingBackEnd.Controllers
             {
                 return Ok(booking);
             }
-            //return Ok(bookingService.UpdateBooking(request));
         }
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] int id)
