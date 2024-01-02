@@ -47,7 +47,7 @@ namespace PosBookingBackEnd.Services
         public Booking? UpdateBooking(UpdateBookingRequest request)
         {
             Booking? oldBooking = storage.Bookings.SingleOrDefault(x => x.Id == request.Id);
-            var booking = oldBooking;
+            Booking? booking = oldBooking;
 
             if (oldBooking != null && booking != null)
             {
@@ -86,13 +86,16 @@ namespace PosBookingBackEnd.Services
             }
             return booking;
         }
-        public void DeleteBooking(DeleteBookingRequest request)
+        public bool DeleteBooking(int id)
         {
-            Booking chosenBooking = bookings.SingleOrDefault(x => x.Id == request.Id);
+            Booking chosenBooking = bookings.SingleOrDefault(x => x.Id == id);
             if(chosenBooking != null)
             {
                 storage.Bookings.Remove(chosenBooking);
+                storage.SaveBookings();
+                return true;
             }
+            return false;
         }
     }
 }

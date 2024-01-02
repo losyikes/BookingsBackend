@@ -103,6 +103,7 @@ namespace PosBookingBackEnd.Model
             }
         }
         public string? Note { get; set; }
+        public TimeSpan Duration { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")

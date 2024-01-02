@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PosBookingBackEnd.Interfaces;
+using PosBookingBackEnd.Model;
 using PosBookingBackEnd.Model.Requests;
 using PosBookingBackEnd.Services;
 
@@ -21,18 +22,44 @@ namespace PosBookingBackEnd.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PostBookingRequest request)
         {
-            return Ok(bookingService.InsertBooking(request));
+            Booking? booking = bookingService.InsertBooking(request);
+            if(booking == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok();
+            }
+            
         }
         [HttpPut]
         public async Task<IActionResult> Put([FromBody]UpdateBookingRequest request)
         {
-            return Ok(bookingService.UpdateBooking(request));
+            Booking? booking = bookingService.UpdateBooking(request);
+            if(booking == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(booking);
+            }
+            //return Ok(bookingService.UpdateBooking(request));
         }
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] DeleteBookingRequest request)
+        public async Task<IActionResult> Delete([FromQuery] int id)
         {
-            bookingService.DeleteBooking(request);
-            return Ok();
+            bool isDeleted = bookingService.DeleteBooking(id);
+            if (isDeleted)
+            {
+                return Ok();
+
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
     }

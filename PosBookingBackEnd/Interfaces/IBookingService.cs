@@ -8,6 +8,6 @@ namespace PosBookingBackEnd.Interfaces
         public List<Booking> GetBookings(GetBookingsRequest request);
         public Booking? UpdateBooking(UpdateBookingRequest request);
         public Booking InsertBooking(PostBookingRequest request);
-        public void DeleteBooking(DeleteBookingRequest request);
+        public bool DeleteBooking(int id);
     }
 }
