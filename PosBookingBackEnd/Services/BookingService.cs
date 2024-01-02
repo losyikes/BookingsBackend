@@ -51,7 +51,7 @@ namespace PosBookingBackEnd.Services
 
             if (oldBooking != null && booking != null)
             {
-                var index = storage.Bookings.ToList().FindIndex(x => x.Id == oldBooking.Id);
+                int index = storage.Bookings.ToList().FindIndex(x => x.Id == oldBooking.Id);
                 if (request.CustomerName != null)
                 {
                     booking.CustomerName = request.CustomerName;
@@ -70,7 +70,7 @@ namespace PosBookingBackEnd.Services
                 }
                 if(request.TypeId != null)
                 {
-                    BookingType? bookingType = bookingTypes.SingleOrDefault(y => y.Id == request.TypeId);
+                    BookingType? bookingType = storage.BookingTypes.SingleOrDefault(y => y.Id == request.TypeId);
                     if(bookingType != null)
                     {
                         booking.Type = bookingType;
@@ -88,7 +88,7 @@ namespace PosBookingBackEnd.Services
         }
         public bool DeleteBooking(int id)
         {
-            Booking chosenBooking = bookings.SingleOrDefault(x => x.Id == id);
+            Booking? chosenBooking = bookings.SingleOrDefault(x => x.Id == id);
             if(chosenBooking != null)
             {
                 storage.Bookings.Remove(chosenBooking);

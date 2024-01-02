@@ -10,8 +10,9 @@ namespace PosBookingBackEnd.Model
         private DateTime startTime;
         private DateTime endTime;
         private string customerName;
-        private string customerPhone;
-        private string note;
+        private string? customerPhone;
+        private string? note;
+        private TimeSpan duration;
         public int Id 
         {
             get
@@ -102,8 +103,36 @@ namespace PosBookingBackEnd.Model
                 }
             }
         }
-        public string? Note { get; set; }
-        public TimeSpan Duration { get; set; }
+        public string? Note
+        {
+            get
+            {
+                return note;
+            }
+            set
+            {
+                if(note != value)
+                {
+                    note = value;
+                    OnPropertyChanged(nameof(Note));
+                }
+            }
+        }
+        public TimeSpan Duration
+        {
+            get
+            {
+                return duration;
+            }
+            set
+            {
+                if(duration != value)
+                {
+                    duration = value;
+                    OnPropertyChanged(nameof(Duration));
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")

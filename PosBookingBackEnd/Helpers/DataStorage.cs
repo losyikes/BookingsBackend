@@ -143,7 +143,7 @@ namespace PosBookingBackEnd.Helpers
         }
         public void SaveBookingTypes()
         {
-            var json = JsonSerializer.Serialize(BookingTypes);
+            string json = JsonSerializer.Serialize(BookingTypes);
             
             File.WriteAllText(bookingTypePath, json);
         }
